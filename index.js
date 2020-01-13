@@ -44,7 +44,7 @@ server.post('/api/users', (req, res)=>{
             console.log('post error',err)
             res.status(500).json({errorMessage: 'so sorry! unable to create user'})
         })
-})
+});
 
 //DELETE a user
 server.delete(`/api/users/:id`, (req, res)=>{
@@ -57,8 +57,9 @@ server.delete(`/api/users/:id`, (req, res)=>{
             console.log('delete error',err)
             res.status(500).json({errorMessage: 'so sorry! unable to delete user'})
         })
-})
+});
 
+//UPDATE a user
 server.put('/api/users/:id', (req, res)=>{
     const id = req.params.id;
     Users.update(id, req.body)
@@ -69,7 +70,7 @@ server.put('/api/users/:id', (req, res)=>{
             console.log('update error',err)
             res.status(500).json({errorMessage: 'so sorry! unable to update user'})
         })
-})
+});
 
 const port = 8000;
 server.listen(port, ()=>console.log(`\n ** api on port: ${port} ** \n`));
