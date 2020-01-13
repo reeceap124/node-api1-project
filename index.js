@@ -59,5 +59,17 @@ server.delete(`/api/users/:id`, (req, res)=>{
         })
 })
 
+server.put('/api/users/:id', (req, res)=>{
+    const id = req.params.id;
+    Users.update(id, req.body)
+        .then(updated =>{
+            res.status(201).json(updated)
+        })
+        .catch(err=>{
+            console.log('update error',err)
+            res.status(500).json({errorMessage: 'so sorry! unable to update user'})
+        })
+})
+
 const port = 8000;
 server.listen(port, ()=>console.log(`\n ** api on port: ${port} ** \n`));
