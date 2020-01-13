@@ -22,12 +22,13 @@ server.get('/api/users', function(req, res){
 
 // GET user by id
 server.get('/api/users/:id', function(req, res){
+    const id = req.params.id
     Users.findById(id)
         .then(user => {
             res.status(200).json({user})
         })
         .catch(err=>{
-            console.log('get users error',err)
+            console.log('get user error',err)
             res.status(500).json({errorMessage: 'so sorry! there was an error getting user'})
         })
 });
@@ -40,8 +41,21 @@ server.post('/api/users', (req, res)=>{
             res.status(201).json(user);
         })
         .catch(err=>{
-            console.log('get users error',err)
+            console.log('post error',err)
             res.status(500).json({errorMessage: 'so sorry! unable to create user'})
+        })
+})
+
+//DELETE a user
+server.delete(`/api/users/:id`, (req, res)=>{
+    const id = req.params.id
+    Users.remove(id)
+        .then(user=>{
+            res.status(201).json(user)
+        })
+        .catch(err=>{
+            console.log('delete error',err)
+            res.status(500).json({errorMessage: 'so sorry! unable to delete user'})
         })
 })
 
